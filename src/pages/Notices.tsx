@@ -1,24 +1,17 @@
-import { formatDate, type Notice } from "../content";
 import { Layout } from "../Layout";
+import { ListSkeleton } from "../notices/Skeleton";
 
-export function Notices({ notices }: { notices: Notice[] }) {
+// 빌드 때는 껍데기만 만든다. 공지 내용은 src/notices-client.tsx가 API에서 받아 채운다.
+export function Notices() {
   return (
     <Layout>
-      <h1>공지사항</h1>
-      {notices.length === 0 ? (
-        <p className="empty">아직 공지가 없어요.</p>
-      ) : (
-        <ul className="notice-list">
-          {notices.map((n) => (
-            <li key={n.slug}>
-              <a href={`/notices/${n.slug}/`}>
-                <span className="notice-title">{n.title}</span>
-                <time dateTime={n.date}>{formatDate(n.date)}</time>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div id="notices-root">
+        <h1>공지사항</h1>
+        <ListSkeleton />
+        <noscript>
+          <p className="empty">공지를 보려면 JavaScript를 켜 주세요.</p>
+        </noscript>
+      </div>
     </Layout>
   );
 }

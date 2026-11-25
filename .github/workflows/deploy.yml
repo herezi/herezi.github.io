@@ -27,9 +27,14 @@ jobs:
       - run: npm run build
       - name: Check pages exist
         run: |
-          for f in index.html privacy/index.html terms/index.html notices/index.html 404.html .nojekyll; do
+          for f in index.html privacy/index.html terms/index.html notices/index.html notices/2026-11-25-test-start/index.html 404.html .nojekyll; do
             test -f "dist/$f" || { echo "missing dist/$f"; exit 1; }
           done
+          # 정적 페이지에는 JS가 없어야 하고, /notices/에는 있어야 한다.
+          for f in index.html privacy/index.html terms/index.html; do
+            ! grep -q "<script" "dist/$f" || { echo "unexpected script in dist/$f"; exit 1; }
+          done
+          grep -q '<script type="module"' dist/notices/index.html || { echo "missing script in dist/notices/index.html"; exit 1; }
       - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
