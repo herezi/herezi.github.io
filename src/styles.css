@@ -1,0 +1,117 @@
+:root {
+  --ink: #191f28;
+  --ink-2: #4e5968;
+  --ink-3: #8b95a1;
+  --line: #e5e8eb;
+  --bg: #ffffff;
+  --bg-soft: #f9fafb;
+  --press: #f2f4f6;
+  --warn-bg: #fff4e5;
+  --warn-ink: #8a4b00;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) 20px max(64px, env(safe-area-inset-bottom));
+}
+
+a { color: var(--ink); text-underline-offset: 3px; }
+
+header.site { margin: 0 0 32px; }
+header.site a {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink); text-decoration: none; font-weight: 700; font-size: 17px;
+}
+header.site img { border-radius: 7px; }
+
+h1 { font-size: 26px; line-height: 1.38; margin: 0 0 8px; letter-spacing: -0.02em; font-weight: 700; }
+h2 { font-size: 20px; line-height: 1.4; margin: 44px 0 12px; letter-spacing: -0.01em; font-weight: 700; }
+h3 { font-size: 17px; margin: 24px 0 8px; }
+p, ul, ol { margin: 0 0 14px; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+strong { font-weight: 700; }
+
+.meta { color: var(--ink-3); font-size: 14px; margin-bottom: 28px; }
+
+/* 법률 문서 */
+.draft {
+  background: var(--warn-bg); color: var(--warn-ink);
+  border-radius: 14px; padding: 14px 16px; margin: 0 0 28px;
+  font-size: 15px; line-height: 1.6;
+}
+.draft strong { display: block; font-size: 16px; margin-bottom: 2px; }
+.todo {
+  background: #ffe8b3; color: var(--warn-ink); border-radius: 4px;
+  padding: 0 4px; font-size: 0.92em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.table-wrap { overflow-x: auto; margin: 0 0 16px; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.6; }
+th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
+th { background: var(--bg-soft); font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+nav.toc { background: var(--bg-soft); border-radius: 14px; padding: 16px 20px; margin: 0 0 8px; font-size: 15px; }
+nav.toc ol { margin: 0; }
+
+/* 홈 */
+.hero { text-align: center; padding: 48px 0 8px; }
+.hero img { border-radius: 20px; }
+.hero h1 { font-size: 28px; margin-top: 20px; }
+.hero p { color: var(--ink-2); font-size: 17px; margin: 0; }
+.links { list-style: none; padding: 0; margin: 40px 0 0; }
+.links li { margin: 0; }
+.links a {
+  display: block; padding: 16px 4px; text-decoration: none; font-weight: 600; font-size: 17px;
+  border-bottom: 1px solid var(--line);
+}
+.links li:first-child a { border-top: 1px solid var(--line); }
+.links a::after, .notice-list a::after { content: "›"; float: right; color: var(--ink-3); font-weight: 400; }
+.links a:active, .notice-list a:active { background: var(--press); }
+.contact { color: var(--ink-3); font-size: 14px; text-align: center; margin-top: 32px; }
+
+/* 공지 */
+.notice-list { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--line); }
+.notice-list li { margin: 0; }
+.notice-list a {
+  display: block; padding: 18px 4px; text-decoration: none; border-bottom: 1px solid var(--line);
+}
+.notice-list a::after { margin-top: -38px; }
+.notice-title { display: block; font-size: 17px; font-weight: 600; line-height: 1.5; padding-right: 20px; }
+.notice-list time { display: block; color: var(--ink-3); font-size: 14px; margin-top: 4px; }
+.empty { color: var(--ink-3); }
+.notice h1 { margin-bottom: 6px; }
+.prose { font-size: 17px; line-height: 1.8; color: var(--ink); }
+.prose p { margin: 0 0 18px; }
+.prose img { max-width: 100%; height: auto; border-radius: 12px; }
+.back { margin-top: 40px; }
+.back a { color: var(--ink-2); font-size: 15px; }
+
+footer.site {
+  margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
+  color: var(--ink-3); font-size: 14px;
+}
+footer.site nav { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+footer.site a { color: var(--ink-2); text-decoration: none; }
+
+@media (min-width: 600px) {
+  main { padding-top: 48px; }
+  h1 { font-size: 28px; }
+}
