@@ -101,7 +101,39 @@ nav.toc ol { margin: 0; }
 .prose { font-size: 17px; line-height: 1.8; color: var(--ink); }
 .prose p { margin: 0 0 18px; }
 .prose img { max-width: 100%; height: auto; border-radius: 12px; }
+.prose a { word-break: break-all; }
+.prose ul, .prose ol { margin-bottom: 18px; }
+.prose blockquote { margin: 0 0 18px; padding: 2px 0 2px 14px; border-left: 3px solid var(--line); color: var(--ink-2); }
+.prose code { background: var(--bg-soft); border-radius: 4px; padding: 1px 4px; font-size: 0.9em; }
+.prose pre { background: var(--bg-soft); border-radius: 12px; padding: 14px 16px; overflow-x: auto; font-size: 14px; }
+.prose pre code { background: none; padding: 0; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
 .back { margin-top: 40px; }
+
+/* 공지: 로딩 자리 표시 */
+.skeleton .sk {
+  display: block; border-radius: 6px; background: var(--press);
+  animation: sk-pulse 1.4s ease-in-out infinite;
+}
+.notice-list.skeleton li { padding: 20px 4px; border-bottom: 1px solid var(--line); }
+.sk-title { height: 20px; width: 72%; }
+.sk-date { height: 14px; width: 84px; margin-top: 10px; }
+.sk-h1 { height: 30px; width: 80%; margin-top: 4px; }
+div.skeleton .sk-date { margin-bottom: 32px; }
+.sk-line { height: 17px; width: 100%; margin-bottom: 14px; }
+.sk-line.short { width: 56%; }
+@keyframes sk-pulse { 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) { .skeleton .sk { animation: none; } }
+
+/* 공지: 오류·없음 상태 */
+.state { padding: 24px 0 0; }
+.state-title { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.state-desc { color: var(--ink-3); font-size: 15px; margin: 0 0 20px; }
+.retry {
+  appearance: none; border: 0; border-radius: 12px; background: var(--press); color: var(--ink);
+  font: inherit; font-size: 15px; font-weight: 600; padding: 12px 20px; cursor: pointer;
+}
+.retry:active { background: var(--line); }
 .back a { color: var(--ink-2); font-size: 15px; }
 
 footer.site {
