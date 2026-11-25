@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import { marked } from "marked";
+import { Marked } from "marked";
 import { useCallback, useEffect, useMemo, useState, type MouseEvent } from "react";
 
 import { fetchNotice, fetchNotices, formatDate, NotFoundError, type Notice, type NoticeSummary } from "./api";
@@ -86,9 +86,29 @@ function NoticeList({ go }: { go: (e: MouseEvent<HTMLAnchorElement>, id: number 
   );
 }
 
+// 줄바꿈 한 번 = <br> (Table Editor에서 쓰기 편하게).
+const markdown = new Marked({ gfm: true, breaks: true, async: false });
+// CommonMark 규칙상 `**"정보가 달라요"**를`처럼 닫는 ** 앞이 문장부호이고 뒤가 한글이면 굵게가 안 된다.
+// 한국어 공지에서 흔한 패턴이라 **…**는 앞뒤 글자와 상관없이 굵게로 처리한다.
+markdown.use({
+  extensions: [
+    {
+      name: "strongCjk",
+      level: "inline",
+      start(src: string) {
+        const i = src.indexOf("**");
+        return i < 0 ? undefined : i;
+      },
+      tokenizer(src: string) {
+        const m = /^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/.exec(src);
+        if (m) return { type: "strong", raw: m[0], text: m[1], tokens: this.lexer.inlineTokens(m[1]) };
+      },
+    },
+  ],
+});
+
 function renderMarkdown(body: string): string {
-  const html = marked.parse(body, { async: false, gfm: true, breaks: true });
-  return DOMPurify.sanitize(html);
+  return DOMPurify.sanitize(markdown.parse(body) as string);
 }
 
 function NoticeDetail({ id, go }: { id: number; go: (e: MouseEvent<HTMLAnchorElement>, id: number | null) => void }) {
